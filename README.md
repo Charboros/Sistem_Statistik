@@ -65,6 +65,38 @@ Sistem Data Statistik Layanan Dokumen Kependudukan dan Pencatatan Sipil (Disdukc
 - **Halaman Utama (Publik)**: Akses root URL `/` untuk melihat dashboard statistik layanan.
 - **Halaman Admin**: Akses `/admin` untuk masuk ke halaman panel pengelola data. (Pastikan rute diamankan dengan *middleware* autentikasi jika diaplikasikan pada produksi).
 
+### Panduan Admin (Admin Guide)
+
+Halaman Admin (`/admin`) menyediakan antarmuka pengelola data interaktif untuk mengelola statistik pelayanan secara praktis:
+
+1. **Menambah Data Lokasi Baru**
+   - Klik tombol **Lokasi** di bagian atas (berwarna biru).
+   - Pilih **Kategori** (Kecamatan, MPP, atau Dinas).
+   - Masukkan **Nama Lokasi** (contoh: *Lebaksiu*).
+   - Klik **Add**. Lokasi baru akan otomatis memiliki semua daftar layanan (dengan nilai 0).
+
+2. **Menambah Jenis Layanan Baru**
+   - Klik tombol **Layanan** di bagian atas (berwarna hijau).
+   - Masukkan **Nama Layanan** baru (contoh: *Akta Kelahiran*).
+   - Klik **Add**. Layanan ini akan otomatis ditambahkan ke semua lokasi (dengan nilai 0).
+
+3. **Memperbarui Statistik Layanan**
+   - Klik pada nama lokasi mana pun untuk membuka daftarnya (*accordion*).
+   - Ketik/ubah angka pada kolom layanan yang diinginkan.
+   - Angka Total di bagian atas layar akan diperbarui secara *real-time*.
+   - **PENTING:** Klik tombol biru **Simpan perubahan** di kanan atas agar data tersimpan ke *database*.
+
+4. **Mengubah Nama atau Menghapus Lokasi**
+   - Arahkan kursor (*hover*) ke nama lokasi yang akordeonnya sedang terbuka.
+   - Klik ikon **Pena** untuk mengubah nama lokasi, atau ikon **Tempat Sampah** untuk menghapus lokasi tersebut beserta seluruh datanya.
+
+5. **Menghapus Jenis Layanan**
+   - Buka lokasi mana pun, lalu arahkan kursor (*hover*) ke area teks nama layanan.
+   - Klik ikon **Tempat Sampah** yang muncul. Peringatan: Menghapus layanan akan menghapus layanan tersebut dari **seluruh** lokasi.
+
+6. **Membatalkan Perubahan**
+   - Jika Anda belum mengeklik "Simpan perubahan" dan ingin mengulang form, klik opsi **Muat ulang data awal**.
+
 ## Teknologi yang Digunakan
 
 - [Laravel](https://laravel.com/)

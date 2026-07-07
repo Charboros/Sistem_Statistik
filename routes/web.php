@@ -30,4 +30,9 @@ Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/', function () {
+    return 'Laravel Version: ' . app()->version() . ' | PHP Version: ' . phpversion();
+});
+
+
 require __DIR__.'/auth.php';

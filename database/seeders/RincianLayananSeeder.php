@@ -31,33 +31,45 @@ class RincianLayananSeeder extends Seeder
 
         foreach ($kecamatans as $kecamatan) {
             foreach ($layananTypes as $layanan) {
-                RincianLayananPerKecamatan::create([
-                    'nama_kecamatan' => $kecamatan,
-                    'kategori' => 'kecamatan',
-                    'jenis_layanan' => $layanan,
-                    'jumlah' => rand(0, 60)
-                ]);
+                RincianLayananPerKecamatan::updateOrCreate(
+                    [
+                        'nama_kecamatan' => $kecamatan,
+                        'jenis_layanan' => $layanan,
+                    ],
+                    [
+                        'kategori' => 'kecamatan',
+                        'jumlah' => rand(0, 60)
+                    ]
+                );
             }
         }
 
         // MPP
         foreach ($layananTypes as $layanan) {
-            RincianLayananPerKecamatan::create([
-                'nama_kecamatan' => 'MPP',
-                'kategori' => 'mpp',
-                'jenis_layanan' => $layanan,
-                'jumlah' => rand(0, 20)
-            ]);
+            RincianLayananPerKecamatan::updateOrCreate(
+                [
+                    'nama_kecamatan' => 'MPP',
+                    'jenis_layanan' => $layanan,
+                ],
+                [
+                    'kategori' => 'mpp',
+                    'jumlah' => rand(0, 20)
+                ]
+            );
         }
 
         // Dinas Dukcapil
         foreach ($layananTypes as $layanan) {
-            RincianLayananPerKecamatan::create([
-                'nama_kecamatan' => 'Dinas Dukcapil',
-                'kategori' => 'dinas',
-                'jenis_layanan' => $layanan,
-                'jumlah' => rand(10, 250)
-            ]);
+            RincianLayananPerKecamatan::updateOrCreate(
+                [
+                    'nama_kecamatan' => 'Dinas Dukcapil',
+                    'jenis_layanan' => $layanan,
+                ],
+                [
+                    'kategori' => 'dinas',
+                    'jumlah' => rand(10, 250)
+                ]
+            );
         }
     }
 }

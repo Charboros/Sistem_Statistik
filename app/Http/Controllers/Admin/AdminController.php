@@ -70,10 +70,12 @@ class AdminController extends Controller
         $inputData = $request->input('data');
         
         if ($inputData) {
-            foreach ($inputData as $id => $jumlah) {
-                RincianLayananPerKecamatan::where('id', $id)
-                    ->update(['jumlah' => (int) $jumlah]);
-            }
+            \Illuminate\Support\Facades\DB::transaction(function () use ($inputData) {
+                foreach ($inputData as $id => $jumlah) {
+                    RincianLayananPerKecamatan::where('id', $id)
+                        ->update(['jumlah' => (int) $jumlah]);
+                }
+            });
         }
         
         return redirect()->back()->with('success', 'Perubahan berhasil disimpan.');
@@ -87,23 +89,33 @@ class AdminController extends Controller
 
         $newType = trim($request->input('new_layanan'));
 
-        // Get all unique locations and their categories
-        $locations = RincianLayananPerKecamatan::select('nama_kecamatan', 'kategori')->distinct()->get();
+        // Get locations that already have this service type
+        $existingLocations = RincianLayananPerKecamatan::where('jenis_layanan', $newType)
+            ->pluck('nama_kecamatan')
+            ->toArray();
 
+        // Get all unique locations and their categories, excluding those that already have this service
+        $locations = RincianLayananPerKecamatan::select('nama_kecamatan', 'kategori')
+            ->whereNotIn('nama_kecamatan', $existingLocations)
+            ->distinct()
+            ->get();
+
+        $insertData = [];
+        $now = now();
+        
         foreach ($locations as $loc) {
-            // Check if it already exists to prevent duplicates
-            $exists = RincianLayananPerKecamatan::where('nama_kecamatan', $loc->nama_kecamatan)
-                ->where('jenis_layanan', $newType)
-                ->exists();
+            $insertData[] = [
+                'nama_kecamatan' => $loc->nama_kecamatan,
+                'kategori' => $loc->kategori,
+                'jenis_layanan' => $newType,
+                'jumlah' => 0,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+        }
 
-            if (!$exists) {
-                RincianLayananPerKecamatan::create([
-                    'nama_kecamatan' => $loc->nama_kecamatan,
-                    'kategori' => $loc->kategori,
-                    'jenis_layanan' => $newType,
-                    'jumlah' => 0
-                ]);
-            }
+        if (!empty($insertData)) {
+            RincianLayananPerKecamatan::insert($insertData);
         }
 
         return redirect()->back()->with('success', 'Jenis layanan "'.$newType.'" berhasil ditambahkan.');
@@ -140,24 +152,33 @@ class AdminController extends Controller
         // Get all unique service types
         $layananTypes = RincianLayananPerKecamatan::select('jenis_layanan')->distinct()->pluck('jenis_layanan');
 
+        $insertData = [];
+        $now = now();
+
         foreach ($layananTypes as $jenis) {
-            RincianLayananPerKecamatan::create([
+            $insertData[] = [
                 'nama_kecamatan' => $newLokasi,
                 'kategori' => $kategori,
                 'jenis_layanan' => $jenis,
-                'jumlah' => 0
-            ]);
+                'jumlah' => 0,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
         }
 
         // Jika belum ada layanan sama sekali, buat satu layanan dummy agar lokasi bisa tampil
-        if ($layananTypes->isEmpty()) {
-            RincianLayananPerKecamatan::create([
+        if (empty($insertData)) {
+            $insertData[] = [
                 'nama_kecamatan' => $newLokasi,
                 'kategori' => $kategori,
                 'jenis_layanan' => 'Layanan Default',
-                'jumlah' => 0
-            ]);
+                'jumlah' => 0,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
         }
+
+        RincianLayananPerKecamatan::insert($insertData);
 
         return redirect()->back()->with('success', 'Lokasi "'.$newLokasi.'" berhasil ditambahkan.');
     }

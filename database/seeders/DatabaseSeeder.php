@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory()->create([
-            'name' => 'Admin Dukcapil',
-            'email' => 'admin@dukcapil.go.id',
-            'password' => bcrypt('password'),
-        ]);
+        \App\Models\User::firstOrCreate(
+            ['email' => 'admin@dukcapil.go.id'],
+            [
+                'name' => 'Admin Dukcapil',
+                'password' => bcrypt('password'),
+            ]
+        );
 
         $this->call([
             RincianLayananSeeder::class,

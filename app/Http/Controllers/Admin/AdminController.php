@@ -61,11 +61,18 @@ class AdminController extends Controller
             return strcmp($a, $b);
         });
 
-        return view('admin.index', compact('countKecamatan', 'locations', 'layananTypes', 'totalKecamatan', 'totalMpp', 'totalDinas', 'totalKeseluruhan'));
+        $tanggalData = cache('tanggal_data', date('Y-m-d'));
+
+        return view('admin.index', compact('countKecamatan', 'locations', 'layananTypes', 'totalKecamatan', 'totalMpp', 'totalDinas', 'totalKeseluruhan', 'tanggalData'));
     }
 
     public function store(Request $request)
     {
+        // Simpan tanggal ke cache
+        if ($request->has('tanggal_data')) {
+            cache(['tanggal_data' => $request->input('tanggal_data')], now()->addYears(1));
+        }
+
         // The data comes as: data[id] = jumlah
         $inputData = $request->input('data');
         

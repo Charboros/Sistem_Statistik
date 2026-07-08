@@ -234,7 +234,7 @@
         <!-- Footer -->
         <footer class="flex flex-col items-center justify-center pb-8 border-t border-blue-800 pt-8 mt-8">
             <div class="border border-blue-400 text-blue-200 bg-blue-900/50 px-3 py-1 rounded text-xs font-bold mb-6">
-                Senin, 22 Juni 2026
+                {{ \Carbon\Carbon::parse($tanggalData)->locale('id')->translatedFormat('l, d F Y') }}
             </div>
             <div class="flex items-center space-x-6 text-[10px] font-bold text-blue-300 mb-3">
                 <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">

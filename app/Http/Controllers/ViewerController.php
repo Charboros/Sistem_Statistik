@@ -101,11 +101,12 @@ class ViewerController extends Controller
         usort($rankingData, fn($a, $b) => $b['total'] <=> $a['total']); // Descending
 
         $countKecamatan = $raw->where('kategori', 'kecamatan')->pluck('nama_kecamatan')->unique()->count();
+        $tanggalData = cache('tanggal_data', date('Y-m-d'));
 
         return view('welcome', compact(
             'countKecamatan', 'totalKecamatan', 'totalMpp', 'totalDinas', 'totalKeseluruhan',
             'rekapData', 'chartLabels', 'chartData', 'chartColors',
-            'rincianData', 'layananTypes', 'rankingData'
+            'rincianData', 'layananTypes', 'rankingData', 'tanggalData'
         ));
     }
 }

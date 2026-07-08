@@ -32,7 +32,7 @@
             <div class="flex flex-col md:flex-row justify-between items-end mb-6 px-4 space-y-4 md:space-y-0">
                 <div>
                     <label class="block text-xs text-gray-500 mb-1">Tanggal data</label>
-                    <input type="text" value="Senin, 22 Juni 2026" class="border border-gray-200 rounded px-3 py-1.5 text-sm w-48 text-gray-700 bg-white" readonly>
+                    <input type="date" name="tanggal_data" value="{{ $tanggalData }}" class="border border-gray-200 rounded px-3 py-1.5 text-sm w-48 text-gray-700 bg-white">
                 </div>
                 <div class="flex space-x-3 text-sm items-center">
                     <!-- Form Tambah Lokasi -->

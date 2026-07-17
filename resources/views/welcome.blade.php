@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Statistik Pelayanan Dokumen Kependudukan</title>
+    <title>Sistem Statistik Layanan Disdukcapil</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -39,7 +39,7 @@
     <header class="bg-[#153e75]/90 backdrop-blur-md sticky top-0 z-50 border-b border-blue-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-white text-[#153e75] rounded-full flex items-center justify-center font-bold text-lg">DT</div>
+                <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kabupaten Tegal" class="w-10 h-auto drop-shadow-md">
                 <div class="flex flex-col">
                     <h1 class="font-bold text-white leading-tight">Dinas <span class="text-blue-300">Dukcapil</span></h1>
                     <span class="text-sm font-semibold text-blue-100 leading-tight">Kabupaten Tegal</span>

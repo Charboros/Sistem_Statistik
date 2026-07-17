@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin - Input Data Pelayanan</title>
+    <title>Admin - Sistem Statistik Layanan Disdukcapil</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-[#f8f9fa] text-gray-800 font-sans antialiased pb-20">
+<body class="bg-[#153e75] text-gray-100 font-sans antialiased pb-20">
 
     <div class="max-w-6xl mx-auto mt-8">
         
         <!-- Header -->
-        <div class="flex justify-between items-center mb-8 px-4">
+        <div class="flex justify-between items-center mb-8 px-4 border-b border-blue-800 pb-4">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-lg">DT</div>
+                <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kabupaten Tegal" class="w-10 h-auto drop-shadow-md">
                 <div class="flex items-center space-x-2">
-                    <h1 class="font-bold text-gray-700">Dinas <span class="text-blue-600">Dukcapil</span> Kabupaten Tegal</h1>
-                    <span class="text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-bold">Admin</span>
+                    <h1 class="font-bold text-white leading-tight">Dinas <span class="text-blue-300">Dukcapil</span> Kabupaten Tegal</h1>
+                    <span class="text-[10px] bg-orange-500 text-white px-2 py-0.5 rounded-full font-bold shadow-sm">Admin</span>
                 </div>
             </div>
             <div>
-                <a href="{{ route('home') }}" class="text-sm text-gray-500 hover:text-blue-600">&larr; Kembali ke halaman statistik</a>
+                <a href="{{ route('home') }}" class="text-sm text-blue-300 hover:text-white transition-colors">&larr; Kembali ke halaman statistik</a>
             </div>
         </div>
 
@@ -31,8 +31,8 @@
             <!-- Toolbar -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-6 px-4 space-y-4 md:space-y-0">
                 <div>
-                    <label class="block text-xs text-gray-500 mb-1">Tanggal data</label>
-                    <input type="date" name="tanggal_data" value="{{ $tanggalData }}" class="border border-gray-200 rounded px-3 py-1.5 text-sm w-48 text-gray-700 bg-white">
+                    <label class="block text-xs font-bold text-blue-200 uppercase tracking-wide mb-1">Tanggal data</label>
+                    <input type="date" name="tanggal_data" value="{{ $tanggalData }}" class="border border-blue-400 rounded-lg px-3 py-1.5 text-sm w-48 text-gray-800 font-semibold bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-sm">
                 </div>
                 <div class="flex space-x-3 text-sm items-center">
                     <!-- Form Tambah Lokasi -->
@@ -74,8 +74,8 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('admin.dashboard') }}" class="px-4 py-1.5 bg-white border border-gray-200 text-gray-700 rounded shadow-sm hover:bg-gray-50 font-medium inline-block text-center cursor-pointer">Muat ulang data awal</a>
-                    <button type="submit" class="px-4 py-1.5 bg-blue-500 text-white rounded shadow-sm hover:bg-blue-600 font-bold">Simpan perubahan</button>
+                    <a href="{{ route('admin.dashboard') }}" class="px-4 py-1.5 bg-[#1e4e8c] border border-blue-400 text-white rounded-lg shadow-sm hover:bg-blue-600 font-medium inline-block text-center cursor-pointer transition-colors">Muat ulang data awal</a>
+                    <button type="submit" class="px-4 py-1.5 bg-emerald-500 text-white rounded-lg shadow-sm hover:bg-emerald-600 font-bold transition-colors">Simpan perubahan</button>
                 </div>
             </div>
 
@@ -87,21 +87,21 @@
 
             <!-- Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 px-4">
-                <div class="bg-white border border-gray-100 rounded-lg p-4 shadow-sm">
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                     <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total {{ $countKecamatan }} kecamatan</div>
-                    <div class="text-2xl font-bold text-blue-600" x-text="getCategoryTotal('kecamatan').toLocaleString('id-ID')">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
+                    <div class="text-3xl font-bold text-blue-600" x-text="getCategoryTotal('kecamatan').toLocaleString('id-ID')">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white border border-gray-100 rounded-lg p-4 shadow-sm">
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                     <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total MPP</div>
-                    <div class="text-2xl font-bold text-orange-500" x-text="getCategoryTotal('mpp').toLocaleString('id-ID')">{{ number_format($totalMpp, 0, ',', '.') }}</div>
+                    <div class="text-3xl font-bold text-orange-500" x-text="getCategoryTotal('mpp').toLocaleString('id-ID')">{{ number_format($totalMpp, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white border border-gray-100 rounded-lg p-4 shadow-sm">
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                     <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total Dinas</div>
-                    <div class="text-2xl font-bold text-teal-500" x-text="getCategoryTotal('dinas').toLocaleString('id-ID')">{{ number_format($totalDinas, 0, ',', '.') }}</div>
+                    <div class="text-3xl font-bold text-teal-500" x-text="getCategoryTotal('dinas').toLocaleString('id-ID')">{{ number_format($totalDinas, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white border border-gray-100 rounded-lg p-4 shadow-sm">
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                     <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total Keseluruhan</div>
-                    <div class="text-2xl font-bold text-red-500" x-text="getCategoryTotal('semua').toLocaleString('id-ID')">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
+                    <div class="text-3xl font-bold text-red-500" x-text="getCategoryTotal('semua').toLocaleString('id-ID')">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
                 </div>
             </div>
 

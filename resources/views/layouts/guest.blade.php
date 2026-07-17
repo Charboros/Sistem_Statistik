@@ -15,13 +15,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 animate-gradient-x">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative overflow-hidden bg-gradient-to-br from-[#153e75] via-[#1e4e8c] to-[#0d2a54] animate-gradient-x">
             <!-- Decorative animated shapes -->
-            <div class="absolute top-0 left-0 w-72 h-72 bg-white opacity-20 rounded-full mix-blend-overlay filter blur-xl animate-blob"></div>
-            <div class="absolute top-0 right-0 w-72 h-72 bg-pink-300 opacity-20 rounded-full mix-blend-overlay filter blur-xl animate-blob" style="animation-delay: 2s"></div>
-            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-indigo-300 opacity-20 rounded-full mix-blend-overlay filter blur-xl animate-blob" style="animation-delay: 4s"></div>
+            <div class="absolute top-0 left-0 w-72 h-72 bg-white opacity-10 rounded-full mix-blend-overlay filter blur-xl animate-blob"></div>
+            <div class="absolute top-0 right-0 w-72 h-72 bg-blue-300 opacity-10 rounded-full mix-blend-overlay filter blur-xl animate-blob" style="animation-delay: 2s"></div>
+            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-300 opacity-10 rounded-full mix-blend-overlay filter blur-xl animate-blob" style="animation-delay: 4s"></div>
 
-            <div class="z-10 w-full sm:max-w-md mt-6 px-6 py-8 bg-white/20 dark:bg-gray-900/40 backdrop-blur-lg shadow-2xl border border-white/30 sm:rounded-2xl">
+            <div class="z-10 w-full sm:max-w-md mt-6 px-6 py-8 bg-white/10 dark:bg-gray-900/40 backdrop-blur-md shadow-2xl border border-white/20 sm:rounded-2xl">
                 {{ $slot }}
             </div>
         </div>

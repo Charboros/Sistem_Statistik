@@ -41,11 +41,11 @@
             <div class="flex items-center space-x-3">
                 <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kabupaten Tegal" class="w-10 h-auto drop-shadow-md">
                 <div class="flex flex-col">
-                    <h1 class="font-bold text-white leading-tight">Dinas <span class="text-blue-300">Dukcapil</span></h1>
-                    <span class="text-sm font-semibold text-blue-100 leading-tight">Kabupaten Tegal</span>
+                    <h1 class="font-bold text-white leading-tight text-xl">Dinas <span class="text-blue-300">Dukcapil</span></h1>
+                    <span class="text-base font-semibold text-blue-100 leading-tight">Kabupaten Tegal</span>
                 </div>
             </div>
-            <div class="hidden md:flex space-x-4 text-[10px] font-bold text-blue-300">
+            <div class="hidden md:flex space-x-4 text-xs font-bold text-blue-300">
                 <span>Tegal Luwih APIK</span>
                 <span>Dukcapil PRIMA</span>
                 <span>BerAKHLAK</span>
@@ -58,10 +58,10 @@
         
         <!-- Title Section -->
         <div class="text-center mb-10">
-            <h2 class="text-blue-300 font-bold text-xs tracking-widest uppercase mb-2">Pusat Data Layanan</h2>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-3">Pelayanan Dokumen Kependudukan<br>Dan Pencatatan Sipil</h3>
-            <div class="flex items-center justify-center space-x-2 text-xs font-medium text-blue-200 mb-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <h2 class="text-blue-300 font-bold text-sm tracking-widest uppercase mb-2">Pusat Data Layanan</h2>
+            <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Pelayanan Dokumen Kependudukan<br>Dan Pencatatan Sipil</h3>
+            <div class="flex items-center justify-center space-x-2 text-sm font-medium text-blue-200 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span>Data hari ini - {{ $countKecamatan }} kecamatan + MPP + Dinas</span>
             </div>
         </div>
@@ -69,20 +69,20 @@
         <!-- 4 Summary Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total {{ $countKecamatan }} kecamatan</div>
-                <div class="text-3xl font-bold text-blue-600">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
+                <div class="text-xs text-gray-400 font-bold uppercase mb-1">Total {{ $countKecamatan }} kecamatan</div>
+                <div class="text-4xl font-extrabold text-blue-600">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
             </div>
             <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total MPP</div>
-                <div class="text-3xl font-bold text-orange-500">{{ number_format($totalMpp, 0, ',', '.') }}</div>
+                <div class="text-xs text-gray-400 font-bold uppercase mb-1">Total MPP</div>
+                <div class="text-4xl font-extrabold text-orange-500">{{ number_format($totalMpp, 0, ',', '.') }}</div>
             </div>
             <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total Dinas Dukcapil</div>
-                <div class="text-3xl font-bold text-teal-500">{{ number_format($totalDinas, 0, ',', '.') }}</div>
+                <div class="text-xs text-gray-400 font-bold uppercase mb-1">Total Dinas Dukcapil</div>
+                <div class="text-4xl font-extrabold text-teal-500">{{ number_format($totalDinas, 0, ',', '.') }}</div>
             </div>
             <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total keseluruhan</div>
-                <div class="text-3xl font-bold text-red-500">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
+                <div class="text-xs text-gray-400 font-bold uppercase mb-1">Total keseluruhan</div>
+                <div class="text-4xl font-extrabold text-red-500">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
             </div>
         </div>
 
@@ -92,14 +92,14 @@
             <!-- Donut Chart -->
             <div class="lg:col-span-4 bg-white rounded-xl p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] flex flex-col">
                 <div class="flex items-center space-x-2 mb-6">
-                    <div class="w-1 h-4 bg-blue-500 rounded"></div>
-                    <h4 class="font-bold text-sm text-gray-700">Distribusi jenis layanan</h4>
+                    <div class="w-1 h-5 bg-blue-500 rounded"></div>
+                    <h4 class="font-bold text-base text-gray-700">Distribusi jenis layanan</h4>
                 </div>
                 <div class="relative flex-1 min-h-[250px] flex items-center justify-center">
                     <canvas id="donutChart"></canvas>
                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-2">
-                        <span class="text-2xl font-bold text-gray-800">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</span>
-                        <span class="text-[9px] text-gray-400 font-bold uppercase">Total layanan</span>
+                        <span class="text-3xl font-extrabold text-gray-800">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</span>
+                        <span class="text-[11px] text-gray-400 font-bold uppercase">Total layanan</span>
                     </div>
                 </div>
                 <!-- Custom Legend -->
@@ -116,10 +116,10 @@
             <!-- Rekap Table -->
             <div class="lg:col-span-8 bg-white rounded-xl p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
                 <div class="flex items-center space-x-2 mb-1">
-                    <div class="w-1 h-4 bg-blue-500 rounded"></div>
-                    <h4 class="font-bold text-sm text-gray-700">Rekap jenis layanan per titik</h4>
+                    <div class="w-1 h-5 bg-blue-500 rounded"></div>
+                    <h4 class="font-bold text-base text-gray-700">Rekap jenis layanan per titik</h4>
                 </div>
-                <p class="text-[10px] text-gray-400 mb-4 ml-3">Kecamatan = gabungan {{ $countKecamatan }} kecamatan</p>
+                <p class="text-xs text-gray-400 mb-4 ml-3">Kecamatan = gabungan {{ $countKecamatan }} kecamatan</p>
                 
                 <div class="overflow-x-auto">
                     <table class="w-full text-right table-custom">
@@ -132,19 +132,19 @@
                                 <th class="py-2 px-3">Total</th>
                             </tr>
                         </thead>
-                        <tbody class="text-xs text-gray-600 font-medium border-b border-gray-100">
+                        <tbody class="text-sm text-gray-600 font-semibold border-b border-gray-100">
                             @foreach($rekapData as $jenis => $data)
                             <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                                <td class="py-2.5 px-3 text-left text-gray-700">{{ $jenis }}</td>
+                                <td class="py-2.5 px-3 text-left text-gray-700 font-bold">{{ $jenis }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($data['kecamatan'], 0, ',', '.') }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($data['mpp'], 0, ',', '.') }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($data['dinas'], 0, ',', '.') }}</td>
-                                <td class="py-2.5 px-3 font-bold text-gray-700">{{ number_format($data['total'], 0, ',', '.') }}</td>
+                                <td class="py-2.5 px-3 font-extrabold text-gray-800">{{ number_format($data['total'], 0, ',', '.') }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <tr class="bg-blue-50 text-blue-600 font-bold text-xs">
+                            <tr class="bg-blue-50 text-blue-600 font-bold text-sm">
                                 <td class="py-2.5 px-3 text-left rounded-l">Total</td>
                                 <td class="py-2.5 px-3">{{ number_format($totalKecamatan, 0, ',', '.') }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($totalMpp, 0, ',', '.') }}</td>
@@ -160,23 +160,23 @@
         <!-- Rincian Lengkap per Titik -->
         <div class="bg-white rounded-xl p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] mb-8 overflow-hidden flex flex-col">
             <div class="flex items-center space-x-2 mb-1">
-                <div class="w-1 h-4 bg-blue-500 rounded"></div>
-                <h4 class="font-bold text-sm text-gray-700">Rincian lengkap per titik layanan</h4>
+                <div class="w-1 h-5 bg-blue-500 rounded"></div>
+                <h4 class="font-bold text-base text-gray-700">Rincian lengkap per titik layanan</h4>
             </div>
-            <p class="text-[10px] text-gray-400 mb-4 ml-3">{{ $countKecamatan }} kecamatan + MPP + Dinas Dukcapil &mdash; geser ke samping untuk melihat semua kolom</p>
+            <p class="text-xs text-gray-400 mb-4 ml-3">{{ $countKecamatan }} kecamatan + MPP + Dinas Dukcapil &mdash; geser ke samping untuk melihat semua kolom</p>
             
             <div class="overflow-x-auto custom-scrollbar pb-2">
                 <table class="w-full text-right table-custom whitespace-nowrap">
                     <thead>
                         <tr class="border-b border-gray-100">
-                            <th class="py-3 px-4 text-left sticky left-0 bg-white z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">{{ $countKecamatan }} Kecamatan + MPP + Dinas Dukcapil</th>
+                            <th class="py-3 px-4 text-left sticky left-0 bg-white z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-sm">{{ $countKecamatan }} Kecamatan + MPP + Dinas Dukcapil</th>
                             @foreach($layananTypes as $jenis)
-                                <th class="py-3 px-4">{{ $jenis }}</th>
+                                <th class="py-3 px-4 text-xs">{{ $jenis }}</th>
                             @endforeach
-                            <th class="py-3 px-4 sticky right-0 bg-white shadow-[-2px_0_5px_-2px_rgba(0,0,0,0.05)]">Total</th>
+                            <th class="py-3 px-4 sticky right-0 bg-white shadow-[-2px_0_5px_-2px_rgba(0,0,0,0.05)] text-sm">Total</th>
                         </tr>
                     </thead>
-                    <tbody class="text-xs text-gray-600 font-medium border-b border-gray-100">
+                    <tbody class="text-sm text-gray-600 font-semibold border-b border-gray-100">
                         @foreach($rincianData as $loc => $data)
                             @php
                                 $isSpecial = in_array($data['kategori'], ['mpp', 'dinas']);
@@ -199,12 +199,12 @@
         <!-- Peringkat -->
         <div class="bg-white rounded-xl p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] mb-12">
             <div class="flex items-center space-x-2 mb-4">
-                <div class="w-1 h-4 bg-blue-500 rounded"></div>
-                <h4 class="font-bold text-sm text-gray-700">Peringkat seluruh titik layanan</h4>
+                <div class="w-1 h-5 bg-blue-500 rounded"></div>
+                <h4 class="font-bold text-base text-gray-700">Peringkat seluruh titik layanan</h4>
             </div>
-            <div class="flex items-center space-x-4 mb-6 text-[10px] font-bold text-gray-400">
-                <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span>Kecamatan</span></div>
-                <div class="flex items-center space-x-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span><span>MPP / Dinas</span></div>
+            <div class="flex items-center space-x-4 mb-6 text-xs font-bold text-gray-500">
+                <div class="flex items-center space-x-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span>Kecamatan</span></div>
+                <div class="flex items-center space-x-1.5"><span class="w-2 h-2 rounded-full bg-orange-400"></span><span>MPP / Dinas</span></div>
             </div>
 
             <div class="space-y-3">
@@ -217,13 +217,13 @@
                         $percent = ($rank['total'] / $maxTotal) * 100;
                     @endphp
                     <div class="flex items-center">
-                        <div class="w-32 text-xs font-medium {{ $isSpecial ? 'text-orange-500 font-bold' : 'text-gray-600' }} truncate pr-2">
+                        <div class="w-32 text-sm font-semibold {{ $isSpecial ? 'text-orange-500 font-extrabold' : 'text-gray-700' }} truncate pr-2">
                             {{ $rank['nama'] }}
                         </div>
-                        <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden relative">
+                        <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden relative">
                             <div class="absolute top-0 left-0 h-full rounded-full {{ $isSpecial ? 'bg-orange-400' : 'bg-blue-400' }}" style="width: {{ $percent }}%"></div>
                         </div>
-                        <div class="w-12 text-right text-xs font-bold text-gray-500 pl-2">
+                        <div class="w-16 text-right text-sm font-extrabold text-gray-600 pl-2">
                             {{ number_format($rank['total'], 0, ',', '.') }}
                         </div>
                     </div>
@@ -233,10 +233,10 @@
 
         <!-- Footer -->
         <footer class="flex flex-col items-center justify-center pb-8 border-t border-blue-800 pt-8 mt-8">
-            <div class="border border-blue-400 text-blue-200 bg-blue-900/50 px-3 py-1 rounded text-xs font-bold mb-6">
+            <div class="border border-blue-400 text-blue-200 bg-blue-900/50 px-3 py-1.5 rounded-lg text-sm font-bold mb-6">
                 {{ \Carbon\Carbon::parse($tanggalData)->locale('id')->translatedFormat('l, d F Y') }}
             </div>
-            <div class="flex items-center space-x-6 text-[10px] font-bold text-blue-300 mb-3">
+            <div class="flex items-center space-x-6 text-xs font-bold text-blue-300 mb-4">
                 <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">
                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                     <span>@dukcapilslawi_ofc</span>
@@ -254,7 +254,7 @@
                     <span>disdukcapil.tegalkab.go.id</span>
                 </a>
             </div>
-            <p class="text-[9px] text-blue-400 font-medium">Data diperbarui secara manual setiap hari kerja. Ubah nilai pada <code class="bg-blue-900/50 text-blue-300 px-1 py-0.5 rounded">locations</code> di bagian bawah berkas untuk memperbarui angka setiap titik layanan.</p>
+            <p class="text-xs text-blue-300 font-medium mt-2">Data diperbarui secara manual setiap hari kerja. Ubah nilai pada <code class="bg-blue-900/50 text-blue-200 px-1 py-0.5 rounded">locations</code> di bagian bawah berkas untuk memperbarui angka setiap titik layanan.</p>
         </footer>
 
     </main>

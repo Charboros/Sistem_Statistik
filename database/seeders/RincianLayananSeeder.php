@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\RincianLayananPerKecamatan;
+use Illuminate\Database\Seeder;
 
 class RincianLayananSeeder extends Seeder
 {
     public function run(): void
     {
         $kecamatans = [
-            'Adiwerna', 'Balapulang', 'Bojong', 'Bumijawa', 'Dukuhturi', 
-            'Dukuhwaru', 'Jatinegara', 'Kedungbanteng', 'Kramat', 'Lebaksiu', 
-            'Margasari', 'Pagerbarang', 'Pangkah', 'Slawi', 'Suradadi', 
-            'Talang', 'Tarub', 'Warureja'
+            'Adiwerna', 'Balapulang', 'Bojong', 'Bumijawa', 'Dukuhturi',
+            'Dukuhwaru', 'Jatinegara', 'Kedungbanteng', 'Kramat', 'Lebaksiu',
+            'Margasari', 'Pagerbarang', 'Pangkah', 'Slawi', 'Suradadi',
+            'Talang', 'Tarub', 'Warureja',
         ];
 
         $layananTypes = [
@@ -27,7 +27,7 @@ class RincianLayananSeeder extends Seeder
             'Akta Kelahiran',
             'Akta Kematian',
             'Akta Perkawinan',
-            'Akta Perceraian'
+            'Akta Perceraian',
         ];
 
         foreach ($kecamatans as $kecamatan) {
@@ -39,7 +39,7 @@ class RincianLayananSeeder extends Seeder
                     ],
                     [
                         'kategori' => 'kecamatan',
-                        'jumlah' => rand(0, 60)
+                        'jumlah' => rand(0, 60),
                     ]
                 );
             }
@@ -54,7 +54,7 @@ class RincianLayananSeeder extends Seeder
                 ],
                 [
                     'kategori' => 'mpp',
-                    'jumlah' => rand(0, 20)
+                    'jumlah' => rand(0, 20),
                 ]
             );
         }
@@ -68,7 +68,7 @@ class RincianLayananSeeder extends Seeder
                 ],
                 [
                     'kategori' => 'dinas',
-                    'jumlah' => rand(10, 250)
+                    'jumlah' => rand(10, 250),
                 ]
             );
         }

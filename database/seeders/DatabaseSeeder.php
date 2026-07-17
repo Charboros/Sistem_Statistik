@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::firstOrCreate(
-            ['username' => 'admindukcapil'],
+        User::firstOrCreate(
+            ['username' => 'admin'],
             [
                 'name' => 'Admin Dukcapil',
-                'password' => bcrypt('password'),
+                'password' => bcrypt('password12345678'),
             ]
         );
 

@@ -5,36 +5,37 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\RincianLayananPerKecamatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $raw = RincianLayananPerKecamatan::all();
-        
+
         // Structure: $data['Adiwerna'] = ['kategori' => 'kecamatan', 'layanans' => ['Kartu Keluarga' => 10, ...], 'total' => 194]
         $locations = [];
         $layananTypes = [];
-        
+
         foreach ($raw as $item) {
             $loc = $item->nama_kecamatan;
             $jenis = $item->jenis_layanan;
-            
-            if (!in_array($jenis, $layananTypes)) {
+
+            if (! in_array($jenis, $layananTypes)) {
                 $layananTypes[] = $jenis;
             }
-            
-            if (!isset($locations[$loc])) {
+
+            if (! isset($locations[$loc])) {
                 $locations[$loc] = [
                     'kategori' => $item->kategori,
                     'layanans' => [],
-                    'total' => 0
+                    'total' => 0,
                 ];
             }
-            
+
             $locations[$loc]['layanans'][$jenis] = [
                 'id' => $item->id,
-                'jumlah' => $item->jumlah
+                'jumlah' => $item->jumlah,
             ];
             $locations[$loc]['total'] += $item->jumlah;
         }
@@ -49,15 +50,18 @@ class AdminController extends Controller
         $totalKeseluruhan = $totalKecamatan + $totalMpp + $totalDinas;
 
         // Sort locations alphabetically by name, but put MPP and Dinas at the bottom
-        uksort($locations, function($a, $b) use ($locations) {
+        uksort($locations, function ($a, $b) use ($locations) {
             $katA = $locations[$a]['kategori'];
             $katB = $locations[$b]['kategori'];
-            
+
             // Weights: kecamatan=1, mpp=2, dinas=3
             $wA = $katA == 'kecamatan' ? 1 : ($katA == 'mpp' ? 2 : 3);
             $wB = $katB == 'kecamatan' ? 1 : ($katB == 'mpp' ? 2 : 3);
-            
-            if ($wA != $wB) return $wA <=> $wB;
+
+            if ($wA != $wB) {
+                return $wA <=> $wB;
+            }
+
             return strcmp($a, $b);
         });
 
@@ -75,23 +79,23 @@ class AdminController extends Controller
 
         // The data comes as: data[id] = jumlah
         $inputData = $request->input('data');
-        
+
         if ($inputData) {
-            \Illuminate\Support\Facades\DB::transaction(function () use ($inputData) {
+            DB::transaction(function () use ($inputData) {
                 foreach ($inputData as $id => $jumlah) {
                     RincianLayananPerKecamatan::where('id', $id)
                         ->update(['jumlah' => (int) $jumlah]);
                 }
             });
         }
-        
+
         return redirect()->back()->with('success', 'Perubahan berhasil disimpan.');
     }
 
     public function addLayanan(Request $request)
     {
         $request->validate([
-            'new_layanan' => 'required|string|max:255'
+            'new_layanan' => 'required|string|max:255',
         ]);
 
         $newType = trim($request->input('new_layanan'));
@@ -109,7 +113,7 @@ class AdminController extends Controller
 
         $insertData = [];
         $now = now();
-        
+
         foreach ($locations as $loc) {
             $insertData[] = [
                 'nama_kecamatan' => $loc->nama_kecamatan,
@@ -121,7 +125,7 @@ class AdminController extends Controller
             ];
         }
 
-        if (!empty($insertData)) {
+        if (! empty($insertData)) {
             RincianLayananPerKecamatan::insert($insertData);
         }
 
@@ -131,11 +135,11 @@ class AdminController extends Controller
     public function deleteLayanan(Request $request)
     {
         $request->validate([
-            'layanan_to_delete' => 'required|string'
+            'layanan_to_delete' => 'required|string',
         ]);
 
         $type = $request->input('layanan_to_delete');
-        
+
         RincianLayananPerKecamatan::where('jenis_layanan', $type)->delete();
 
         return redirect()->back()->with('success', 'Jenis layanan "'.$type.'" berhasil dihapus dari semua lokasi.');
@@ -145,7 +149,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'new_lokasi' => 'required|string|max:255',
-            'kategori' => 'required|in:kecamatan,mpp,dinas'
+            'kategori' => 'required|in:kecamatan,mpp,dinas',
         ]);
 
         $newLokasi = trim($request->input('new_lokasi'));
@@ -194,7 +198,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'old_lokasi' => 'required|string',
-            'new_lokasi' => 'required|string|max:255'
+            'new_lokasi' => 'required|string|max:255',
         ]);
 
         $oldLokasi = $request->input('old_lokasi');
@@ -213,11 +217,11 @@ class AdminController extends Controller
     public function deleteLokasi(Request $request)
     {
         $request->validate([
-            'lokasi_to_delete' => 'required|string'
+            'lokasi_to_delete' => 'required|string',
         ]);
 
         $lokasi = $request->input('lokasi_to_delete');
-        
+
         RincianLayananPerKecamatan::where('nama_kecamatan', $lokasi)->delete();
 
         return redirect()->back()->with('success', 'Lokasi "'.$lokasi.'" dan seluruh datanya berhasil dihapus.');

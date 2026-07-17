@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ViewerController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ViewerController::class, 'index'])->name('home');
 
@@ -14,7 +13,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::post('/dashboard/save', [AdminController::class, 'store'])->name('store');
     Route::post('/dashboard/add-layanan', [AdminController::class, 'addLayanan'])->name('add-layanan');
     Route::delete('/dashboard/layanan', [AdminController::class, 'deleteLayanan'])->name('delete-layanan');
-    
+
     Route::post('/dashboard/lokasi', [AdminController::class, 'addLokasi'])->name('add-lokasi');
     Route::put('/dashboard/lokasi', [AdminController::class, 'updateLokasi'])->name('update-lokasi');
     Route::delete('/dashboard/lokasi', [AdminController::class, 'deleteLokasi'])->name('delete-lokasi');

@@ -2,10 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="flex flex-col items-center mb-8">
+    <div class="flex flex-col items-center mb-8 text-center">
         <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kab Tegal" class="h-28 w-auto mb-3 drop-shadow-md transition-transform duration-300 hover:scale-105">
-        <h2 class="text-3xl font-extrabold text-white tracking-wider drop-shadow-sm">SILADMAS</h2>
-        <p class="text-sm font-medium text-blue-200 mt-1">Sistem Informasi Layanan Aduan Masyarakat</p>
+        <h2 class="text-2xl font-extrabold text-white tracking-wider drop-shadow-sm">SISTEM STATISTIK</h2>
+        <p class="text-sm font-medium text-blue-200 mt-1">Layanan Disdukcapil Kabupaten Tegal</p>
     </div>
 
     <form method="POST" action="{{ route('login') }}" class="space-y-5">

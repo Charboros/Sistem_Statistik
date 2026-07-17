@@ -126,7 +126,7 @@
                     <!-- Card Header -->
                     <div class="flex justify-between items-center px-5 py-3 bg-white hover:bg-gray-50 transition-colors group">
                         <div class="flex items-center space-x-3 cursor-pointer" @click="expanded = !expanded">
-                            <span class="font-bold text-gray-700 text-sm">{{ $nama_kecamatan }}</span>
+                            <span class="font-extrabold text-gray-800 text-base">{{ $nama_kecamatan }}</span>
                             @if($data['kategori'] == 'kecamatan')
                                 <span class="text-[9px] bg-gray-100 text-gray-400 font-bold px-2 py-0.5 rounded uppercase tracking-wider">Kecamatan</span>
                             @elseif($data['kategori'] == 'mpp')
@@ -144,8 +144,8 @@
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 </button>
                             </div>
-                            <span class="font-bold text-sm {{ $data['kategori'] == 'mpp' ? 'text-orange-500' : ($data['kategori'] == 'dinas' ? 'text-yellow-600' : 'text-blue-500') }}" x-text="getLocationTotal('{{ $nama_kecamatan }}').toLocaleString('id-ID')">{{ number_format($data['total'], 0, ',', '.') }}</span>
-                            <svg class="w-4 h-4 text-gray-400 transform transition-transform cursor-pointer" @click="expanded = !expanded" :class="{'rotate-180': expanded}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <span class="font-extrabold text-base {{ $data['kategori'] == 'mpp' ? 'text-orange-500' : ($data['kategori'] == 'dinas' ? 'text-yellow-600' : 'text-blue-600') }}" x-text="getLocationTotal('{{ $nama_kecamatan }}').toLocaleString('id-ID')">{{ number_format($data['total'], 0, ',', '.') }}</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform cursor-pointer" @click="expanded = !expanded" :class="{'rotate-180': expanded}" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </div>
                     
@@ -158,16 +158,16 @@
                                 @endphp
                                 <div class="relative group">
                                     <div class="flex justify-between items-center mb-1">
-                                        <label class="block text-[10px] font-bold text-gray-400 uppercase">{{ $jenis }}</label>
+                                        <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">{{ $jenis }}</label>
                                         <button type="button" onclick="deleteLayanan('{{ $jenis }}')" class="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" title="Hapus Layanan Ini">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                         </button>
                                     </div>
                                     @if($val)
-                                        <input type="number" min="0" name="data[{{ $val['id'] }}]" x-model="locations['{{ addslashes($nama_kecamatan) }}'].layanans['{{ addslashes($jenis) }}'].jumlah" class="w-full text-sm border-0 border-b border-gray-200 focus:ring-0 focus:border-blue-400 px-1 py-1 text-right font-medium text-gray-700 bg-transparent">
+                                        <input type="number" min="0" name="data[{{ $val['id'] }}]" x-model="locations['{{ addslashes($nama_kecamatan) }}'].layanans['{{ addslashes($jenis) }}'].jumlah" class="w-full text-base border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-blue-500 px-1 py-1 text-right font-extrabold text-gray-900 bg-transparent">
                                     @else
                                         <!-- Fallback jika data bolong -->
-                                        <input type="number" min="0" disabled value="0" class="w-full text-sm border-0 border-b border-gray-200 focus:ring-0 px-1 py-1 text-right font-medium text-gray-400 bg-transparent cursor-not-allowed" title="Data belum ada, silakan reset form">
+                                        <input type="number" min="0" disabled value="0" class="w-full text-base border-0 border-b-2 border-gray-200 focus:ring-0 px-1 py-1 text-right font-extrabold text-gray-400 bg-transparent cursor-not-allowed" title="Data belum ada, silakan reset form">
                                     @endif
                                 </div>
                             @endforeach

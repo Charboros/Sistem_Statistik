@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['username' => 'admin'],
             [
-                'name' => 'Admin Dukcapil',
+                'name' => 'Admin',
                 'password' => '12345678',
             ]
         );

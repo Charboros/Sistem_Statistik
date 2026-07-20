@@ -164,10 +164,10 @@
                                         </button>
                                     </div>
                                     @if($val)
-                                        <input type="number" min="0" name="data[{{ $val['id'] }}]" x-model="locations['{{ addslashes($nama_kecamatan) }}'].layanans['{{ addslashes($jenis) }}'].jumlah" class="w-full text-base border-0 border-b border-gray-300 focus:ring-0 focus:border-blue-500 px-1 py-1 text-right font-bold text-gray-800 bg-transparent">
+                                        <input type="number" min="0" name="data[{{ $val['id'] }}]" x-model="locations['{{ addslashes($nama_kecamatan) }}'].layanans['{{ addslashes($jenis) }}'].jumlah" class="w-full text-base border-0 border-b border-gray-300 focus:ring-0 focus:border-blue-500 px-1 py-1 text-left font-bold text-gray-800 bg-transparent">
                                     @else
                                         <!-- Fallback jika data bolong -->
-                                        <input type="number" min="0" disabled value="0" class="w-full text-base border-0 border-b border-gray-200 focus:ring-0 px-1 py-1 text-right font-bold text-gray-400 bg-transparent cursor-not-allowed" title="Data belum ada, silakan reset form">
+                                        <input type="number" min="0" disabled value="0" class="w-full text-base border-0 border-b border-gray-200 focus:ring-0 px-1 py-1 text-left font-bold text-gray-400 bg-transparent cursor-not-allowed" title="Data belum ada, silakan reset form">
                                     @endif
                                 </div>
                             @endforeach
@@ -180,99 +180,59 @@
         </form>
     </div>
 
+    <!-- Hidden Forms for Actions -->
+    <form id="form-update-lokasi" method="POST" action="{{ route('admin.update-lokasi') }}" class="hidden">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="old_lokasi" id="put_old_lokasi">
+        <input type="hidden" name="new_lokasi" id="put_new_lokasi">
+    </form>
+
+    <form id="form-delete-lokasi" method="POST" action="{{ route('admin.delete-lokasi') }}" class="hidden">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="lokasi_to_delete" id="del_lokasi_name">
+    </form>
+
+    <form id="form-delete-layanan" method="POST" action="{{ route('admin.delete-layanan') }}" class="hidden">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="layanan_to_delete" id="del_layanan_name">
+    </form>
+
+    <form id="form-add-lokasi" method="POST" action="{{ route('admin.add-lokasi') }}" class="hidden">
+        @csrf
+        <input type="hidden" name="new_lokasi" id="post_new_lokasi">
+        <input type="hidden" name="kategori" id="post_kategori">
+    </form>
+
+    <form id="form-add-layanan" method="POST" action="{{ route('admin.add-layanan') }}" class="hidden">
+        @csrf
+        <input type="hidden" name="new_layanan" id="post_new_layanan">
+    </form>
+
     <script>
         function editLokasi(oldNama) {
             const newNama = prompt('Masukkan nama lokasi baru:', oldNama);
             if (!newNama || newNama.trim() === '' || newNama === oldNama) return;
 
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '{{ route("admin.update-lokasi") }}';
-            
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'PUT';
-
-            const csrf = document.createElement('input');
-            csrf.type = 'hidden';
-            csrf.name = '_token';
-            csrf.value = '{{ csrf_token() }}';
-            
-            const oldInput = document.createElement('input');
-            oldInput.type = 'hidden';
-            oldInput.name = 'old_lokasi';
-            oldInput.value = oldNama;
-            
-            const newInput = document.createElement('input');
-            newInput.type = 'hidden';
-            newInput.name = 'new_lokasi';
-            newInput.value = newNama.trim();
-            
-            form.appendChild(methodInput);
-            form.appendChild(csrf);
-            form.appendChild(oldInput);
-            form.appendChild(newInput);
-            document.body.appendChild(form);
-            form.submit();
+            document.getElementById('put_old_lokasi').value = oldNama;
+            document.getElementById('put_new_lokasi').value = newNama.trim();
+            document.getElementById('form-update-lokasi').submit();
         }
 
         function deleteLokasi(lokasi) {
             if (!confirm('Yakin ingin menghapus lokasi "' + lokasi + '" beserta seluruh datanya?')) return;
-
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '{{ route("admin.delete-lokasi") }}';
             
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'DELETE';
-
-            const csrf = document.createElement('input');
-            csrf.type = 'hidden';
-            csrf.name = '_token';
-            csrf.value = '{{ csrf_token() }}';
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'lokasi_to_delete';
-            input.value = lokasi;
-            
-            form.appendChild(methodInput);
-            form.appendChild(csrf);
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            document.getElementById('del_lokasi_name').value = lokasi;
+            document.getElementById('form-delete-lokasi').submit();
         }
 
         function deleteLayanan(jenis) {
             if (!confirm('Yakin ingin menghapus layanan "' + jenis + '" dari semua lokasi? Semua data untuk layanan ini akan hilang!')) return;
-
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '{{ route("admin.delete-layanan") }}';
             
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'DELETE';
-
-            const csrf = document.createElement('input');
-            csrf.type = 'hidden';
-            csrf.name = '_token';
-            csrf.value = '{{ csrf_token() }}';
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'layanan_to_delete';
-            input.value = jenis;
-            
-            form.appendChild(methodInput);
-            form.appendChild(csrf);
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            document.getElementById('del_layanan_name').value = jenis;
+            document.getElementById('form-delete-layanan').submit();
         }
 
         function submitAddLokasi() {
@@ -280,54 +240,17 @@
             const kategori = document.getElementById('kategori_add').value;
             if (!newLokasi || newLokasi.trim() === '') return alert('Nama lokasi harus diisi!');
 
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '{{ route("admin.add-lokasi") }}';
-            
-            const csrf = document.createElement('input');
-            csrf.type = 'hidden';
-            csrf.name = '_token';
-            csrf.value = '{{ csrf_token() }}';
-            
-            const nameInput = document.createElement('input');
-            nameInput.type = 'hidden';
-            nameInput.name = 'new_lokasi';
-            nameInput.value = newLokasi.trim();
-            
-            const katInput = document.createElement('input');
-            katInput.type = 'hidden';
-            katInput.name = 'kategori';
-            katInput.value = kategori;
-            
-            form.appendChild(csrf);
-            form.appendChild(nameInput);
-            form.appendChild(katInput);
-            document.body.appendChild(form);
-            form.submit();
+            document.getElementById('post_new_lokasi').value = newLokasi.trim();
+            document.getElementById('post_kategori').value = kategori;
+            document.getElementById('form-add-lokasi').submit();
         }
 
         function submitAddLayanan() {
             const newLayanan = document.getElementById('new_layanan').value;
             if (!newLayanan || newLayanan.trim() === '') return alert('Nama layanan harus diisi!');
 
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '{{ route("admin.add-layanan") }}';
-            
-            const csrf = document.createElement('input');
-            csrf.type = 'hidden';
-            csrf.name = '_token';
-            csrf.value = '{{ csrf_token() }}';
-            
-            const nameInput = document.createElement('input');
-            nameInput.type = 'hidden';
-            nameInput.name = 'new_layanan';
-            nameInput.value = newLayanan.trim();
-            
-            form.appendChild(csrf);
-            form.appendChild(nameInput);
-            document.body.appendChild(form);
-            form.submit();
+            document.getElementById('post_new_layanan').value = newLayanan.trim();
+            document.getElementById('form-add-layanan').submit();
         }
 
         document.addEventListener('alpine:init', () => {

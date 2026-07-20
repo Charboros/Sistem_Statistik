@@ -33,7 +33,7 @@
         }
     </style>
 </head>
-<body class="bg-[#153e75] text-gray-100 font-sans antialiased">
+<body class="bg-gradient-to-br from-blue-900 to-slate-800 min-h-screen text-gray-100 font-sans antialiased">
 
     <!-- Header -->
     <header class="bg-gradient-to-r from-blue-700 to-blue-600 sticky top-0 z-50 border-b border-blue-400/30 shadow-lg shadow-blue-900/40">

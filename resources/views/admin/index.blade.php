@@ -76,7 +76,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('admin.dashboard') }}" class="px-4 py-1.5 bg-white/10 border border-white/20 text-white rounded-lg shadow-sm hover:bg-white/20 font-medium inline-block text-center cursor-pointer transition-colors">Muat ulang data awal</a>
+                    <a href="{{ route('admin.dashboard') }}" class="px-4 py-1.5 bg-sky-500 text-white rounded-lg shadow-sm hover:bg-sky-600 font-bold inline-block text-center cursor-pointer transition-colors">Muat ulang data awal</a>
                     <button type="submit" class="px-4 py-1.5 bg-emerald-500 text-white rounded-lg shadow-sm hover:bg-emerald-600 font-bold transition-colors">Simpan perubahan</button>
                 </div>
             </div>

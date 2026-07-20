@@ -9,10 +9,9 @@
 </head>
 <body class="bg-[#153e75] text-gray-100 font-sans antialiased pb-20">
 
-    <div class="max-w-6xl mx-auto mt-8">
-        
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-8 px-4 border-b border-blue-800 pb-4">
+    <!-- Header -->
+    <header class="bg-[#112f5c]/95 backdrop-blur-md sticky top-0 z-50 border-b border-white/10 shadow-lg shadow-black/20 mb-8">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kabupaten Tegal" class="w-10 h-auto drop-shadow-md">
                 <div class="flex items-center space-x-2">
@@ -24,6 +23,9 @@
                 <a href="{{ route('home') }}" class="text-sm text-blue-300 hover:text-white transition-colors">&larr; Kembali ke halaman statistik</a>
             </div>
         </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto">
 
         <form action="{{ route('admin.store') }}" method="POST" x-data="adminData">
             @csrf

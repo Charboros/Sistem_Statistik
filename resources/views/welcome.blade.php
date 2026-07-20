@@ -36,7 +36,7 @@
 <body class="bg-[#153e75] text-gray-100 font-sans antialiased">
 
     <!-- Header -->
-    <header class="bg-[#112f5c]/95 backdrop-blur-md sticky top-0 z-50 border-b border-white/10 shadow-lg shadow-black/20">
+    <header class="bg-gradient-to-r from-blue-700 to-blue-600 sticky top-0 z-50 border-b border-blue-400/30 shadow-lg shadow-blue-900/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <img src="{{ asset('images/logo-tegal.png') }}" alt="Logo Kabupaten Tegal" class="w-10 h-auto drop-shadow-md">

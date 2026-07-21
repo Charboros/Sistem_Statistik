@@ -24,6 +24,15 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'tanggal_data' => 'nullable|date',
+            'data' => 'nullable|array',
+            'data.*' => 'nullable|numeric|min:0|max:2147483647',
+        ], [
+            'data.*.max' => 'Angka yang dimasukkan terlalu besar (maksimal 2.147.483.647).',
+            'data.*.numeric' => 'Nilai yang dimasukkan harus berupa angka.',
+        ]);
+
         $this->dashboardService->updateData(
             $request->input('tanggal_data'),
             $request->input('data')

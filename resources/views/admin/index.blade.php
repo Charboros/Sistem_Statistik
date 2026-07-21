@@ -47,13 +47,13 @@
                         <div x-show="openAddLoc" @click.away="openAddLoc = false" class="absolute top-full right-0 mt-2 w-72 bg-white border border-gray-200 shadow-lg rounded-lg p-3 z-50">
                             <h4 class="text-xs font-bold text-gray-700 mb-2">Tambah Lokasi Baru</h4>
                             <div class="flex flex-col space-y-2">
-                                <select name="kategori_add" id="kategori_add" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400">
+                                <select name="kategori_add" id="kategori_add" class="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400 text-gray-800">
                                     <option value="kecamatan">Kecamatan</option>
                                     <option value="mpp">MPP</option>
                                     <option value="dinas">Dinas</option>
                                 </select>
                                 <div class="flex space-x-2">
-                                    <input type="text" name="new_lokasi" id="new_lokasi" placeholder="Nama lokasi..." class="flex-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400">
+                                    <input type="text" name="new_lokasi" id="new_lokasi" placeholder="Nama lokasi..." class="flex-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400 text-gray-800">
                                     <button type="button" onclick="submitAddLokasi()" class="px-3 py-1 bg-blue-500 text-white rounded text-sm font-bold hover:bg-blue-600">Add</button>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                         <div x-show="openAdd" @click.away="openAdd = false" class="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-3 z-50">
                             <h4 class="text-xs font-bold text-gray-700 mb-2">Tambah Jenis Layanan Baru</h4>
                             <div class="flex space-x-2">
-                                <input type="text" name="new_layanan" id="new_layanan" placeholder="Nama layanan..." class="flex-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400">
+                                <input type="text" name="new_layanan" id="new_layanan" placeholder="Nama layanan..." class="flex-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-400 text-gray-800">
                                 <button type="button" onclick="submitAddLayanan()" class="px-3 py-1 bg-blue-500 text-white rounded text-sm font-bold hover:bg-blue-600">Add</button>
                             </div>
                         </div>
@@ -87,23 +87,39 @@
                 </div>
             @endif
 
+            @if(session('error'))
+                <div class="mx-4 mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 rounded-lg shadow-sm">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mx-4 mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 rounded-lg shadow-sm">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 px-4">
-                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total {{ $countKecamatan }} kecamatan</div>
-                    <div class="text-3xl font-bold text-blue-600" x-text="getCategoryTotal('kecamatan').toLocaleString('id-ID')">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] min-w-0">
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1 truncate">Total {{ $countKecamatan }} kecamatan</div>
+                    <div class="text-3xl font-bold text-blue-600 truncate" :title="getCategoryTotal('kecamatan').toLocaleString('id-ID')" x-text="getCategoryTotal('kecamatan').toLocaleString('id-ID')">{{ number_format($totalKecamatan, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total MPP</div>
-                    <div class="text-3xl font-bold text-orange-500" x-text="getCategoryTotal('mpp').toLocaleString('id-ID')">{{ number_format($totalMpp, 0, ',', '.') }}</div>
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] min-w-0">
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1 truncate">Total MPP</div>
+                    <div class="text-3xl font-bold text-orange-500 truncate" :title="getCategoryTotal('mpp').toLocaleString('id-ID')" x-text="getCategoryTotal('mpp').toLocaleString('id-ID')">{{ number_format($totalMpp, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total Dinas</div>
-                    <div class="text-3xl font-bold text-teal-500" x-text="getCategoryTotal('dinas').toLocaleString('id-ID')">{{ number_format($totalDinas, 0, ',', '.') }}</div>
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] min-w-0">
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1 truncate">Total Dinas</div>
+                    <div class="text-3xl font-bold text-teal-500 truncate" :title="getCategoryTotal('dinas').toLocaleString('id-ID')" x-text="getCategoryTotal('dinas').toLocaleString('id-ID')">{{ number_format($totalDinas, 0, ',', '.') }}</div>
                 </div>
-                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
-                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1">Total Keseluruhan</div>
-                    <div class="text-3xl font-bold text-red-500" x-text="getCategoryTotal('semua').toLocaleString('id-ID')">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
+                <div class="bg-white rounded-xl p-5 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] min-w-0">
+                    <div class="text-[10px] text-gray-400 font-bold uppercase mb-1 truncate">Total Keseluruhan</div>
+                    <div class="text-3xl font-bold text-red-500 truncate" :title="getCategoryTotal('semua').toLocaleString('id-ID')" x-text="getCategoryTotal('semua').toLocaleString('id-ID')">{{ number_format($totalKeseluruhan, 0, ',', '.') }}</div>
                 </div>
             </div>
 
@@ -137,7 +153,7 @@
                                 <span class="text-[9px] bg-yellow-100 text-yellow-600 font-bold px-2 py-0.5 rounded uppercase tracking-wider">Dinas</span>
                             @endif
                         </div>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-4 shrink-0 min-w-0 ml-4">
                             <div class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button type="button" onclick="editLokasi('{{ $nama_kecamatan }}')" class="text-blue-400 hover:text-blue-600" title="Ubah Nama Lokasi">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
@@ -146,8 +162,8 @@
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 </button>
                             </div>
-                            <span class="font-bold text-base {{ $data['kategori'] == 'mpp' ? 'text-orange-500' : ($data['kategori'] == 'dinas' ? 'text-yellow-600' : 'text-blue-600') }}" x-text="getLocationTotal('{{ $nama_kecamatan }}').toLocaleString('id-ID')">{{ number_format($data['total'], 0, ',', '.') }}</span>
-                            <svg class="w-5 h-5 text-gray-500 transform transition-transform cursor-pointer" @click="expanded = !expanded" :class="{'rotate-180': expanded}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                            <span class="font-bold text-base truncate max-w-[100px] sm:max-w-[150px] md:max-w-[200px] {{ $data['kategori'] == 'mpp' ? 'text-orange-500' : ($data['kategori'] == 'dinas' ? 'text-yellow-600' : 'text-blue-600') }}" :title="getLocationTotal('{{ $nama_kecamatan }}').toLocaleString('id-ID')" x-text="getLocationTotal('{{ $nama_kecamatan }}').toLocaleString('id-ID')">{{ number_format($data['total'], 0, ',', '.') }}</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform cursor-pointer shrink-0" @click="expanded = !expanded" :class="{'rotate-180': expanded}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </div>
                     

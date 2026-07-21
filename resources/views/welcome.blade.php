@@ -134,7 +134,7 @@
                         </thead>
                         <tbody class="text-sm text-gray-600 font-semibold border-b border-gray-100">
                             @foreach($rekapData as $jenis => $data)
-                            <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                            <tr class="border-b border-gray-50 hover:bg-gray-100 transition-colors cursor-default">
                                 <td class="py-2.5 px-3 text-left text-gray-700 font-bold">{{ $jenis }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($data['kecamatan'], 0, ',', '.') }}</td>
                                 <td class="py-2.5 px-3">{{ number_format($data['mpp'], 0, ',', '.') }}</td>
@@ -165,23 +165,23 @@
             </div>
             <p class="text-xs text-gray-400 mb-4 ml-3">{{ $countKecamatan }} kecamatan + MPP + Dinas Dukcapil &mdash; geser ke samping untuk melihat semua kolom</p>
             
-            <div class="overflow-x-auto custom-scrollbar pb-2">
+            <div class="overflow-x-auto overflow-y-auto max-h-[70vh] custom-scrollbar pb-2">
                 <table class="w-full text-right table-custom whitespace-nowrap">
                     <thead>
                         <tr class="border-b border-gray-100">
-                            <th class="py-3 px-4 text-left sticky left-0 bg-white z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-sm">{{ $countKecamatan }} Kecamatan + MPP + Dinas Dukcapil</th>
+                            <th class="py-3 px-4 text-left sticky top-0 left-0 bg-white z-20 shadow-[2px_2px_5px_-2px_rgba(0,0,0,0.05)] text-sm">{{ $countKecamatan }} Kecamatan + MPP + Dinas Dukcapil</th>
                             @foreach($layananTypes as $jenis)
-                                <th class="py-3 px-4 text-xs">{{ $jenis }}</th>
+                                <th class="py-3 px-4 text-xs sticky top-0 bg-white z-10 shadow-[0_2px_5px_-2px_rgba(0,0,0,0.05)]">{{ $jenis }}</th>
                             @endforeach
-                            <th class="py-3 px-4 sticky right-0 bg-white shadow-[-2px_0_5px_-2px_rgba(0,0,0,0.05)] text-sm">Total</th>
+                            <th class="py-3 px-4 sticky top-0 right-0 bg-white z-20 shadow-[-2px_2px_5px_-2px_rgba(0,0,0,0.05)] text-sm">Total</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm text-gray-600 font-semibold border-b border-gray-100">
                         @foreach($rincianData as $loc => $data)
                             @php
                                 $isSpecial = in_array($data['kategori'], ['mpp', 'dinas']);
-                                $rowClass = $isSpecial ? 'bg-orange-50 text-orange-600 font-semibold' : 'border-b border-gray-50 hover:bg-gray-50 transition-colors';
-                                $cellClass = $isSpecial ? 'bg-orange-50' : 'bg-white';
+                                $rowClass = $isSpecial ? 'bg-orange-50 text-orange-600 font-semibold group hover:bg-orange-100 transition-colors cursor-default' : 'border-b border-gray-50 group hover:bg-gray-100 transition-colors cursor-default';
+                                $cellClass = $isSpecial ? 'bg-orange-50 group-hover:bg-orange-100 transition-colors' : 'bg-white group-hover:bg-gray-100 transition-colors';
                             @endphp
                             <tr class="{{ $rowClass }}">
                                 <td class="py-3 px-4 text-left font-bold sticky left-0 {{ $cellClass }} shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] {{ $isSpecial ? 'text-orange-600' : 'text-gray-700' }}">{{ $loc }}</td>
@@ -207,7 +207,7 @@
                 <div class="flex items-center space-x-1.5"><span class="w-2 h-2 rounded-full bg-orange-400"></span><span>MPP / Dinas</span></div>
             </div>
 
-            <div class="space-y-3">
+            <div class="space-y-1">
                 @php
                     $maxTotal = count($rankingData) > 0 ? $rankingData[0]['total'] : 1;
                 @endphp
@@ -216,7 +216,7 @@
                         $isSpecial = in_array($rank['kategori'], ['mpp', 'dinas']);
                         $percent = ($rank['total'] / $maxTotal) * 100;
                     @endphp
-                    <div class="flex items-center">
+                    <div class="flex items-center hover:bg-gray-100 px-3 py-2 -mx-3 rounded-xl transition-colors cursor-default">
                         <div class="w-32 text-sm font-semibold {{ $isSpecial ? 'text-orange-500 font-extrabold' : 'text-gray-700' }} truncate pr-2">
                             {{ $rank['nama'] }}
                         </div>
@@ -237,24 +237,24 @@
                 {{ \Carbon\Carbon::parse($tanggalData)->locale('id')->translatedFormat('l, d F Y') }}
             </div>
             <div class="flex items-center space-x-6 text-xs font-bold text-blue-300 mb-4">
-                <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-                    <span>@dukcapilslawi_ofc</span>
+                <a href="https://www.tiktok.com/@disdukkotategal?is_from_webapp=1&sender_device=pc" target="_blank" class="hover:text-white transition-colors flex items-center space-x-1">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 448 512"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h0A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14Z"/></svg>
+                    <span>@disdukkotategal</span>
                 </a>
-                <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg>
+                <a href="https://www.facebook.com/dukcapilslawi/#" target="_blank" class="hover:text-white transition-colors flex items-center space-x-1">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
                     <span>Dukcapil Kab. Tegal</span>
                 </a>
-                <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">
+                <a href="https://www.instagram.com/dukcapilslawi_ofc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="hover:text-white transition-colors flex items-center space-x-1">
                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    <span>dukcapilslawi_ofc</span>
+                    <span>@dukcapilslawi_ofc</span>
                 </a>
-                <a href="#" class="hover:text-white transition-colors flex items-center space-x-1">
+                <a href="https://disdukcapil.tegalkab.go.id" target="_blank" class="hover:text-white transition-colors flex items-center space-x-1">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
                     <span>disdukcapil.tegalkab.go.id</span>
                 </a>
             </div>
-            <p class="text-xs text-blue-300 font-medium mt-2">Data diperbarui secara manual setiap hari kerja. Ubah nilai pada <code class="bg-blue-900/50 text-blue-200 px-1 py-0.5 rounded">locations</code> di bagian bawah berkas untuk memperbarui angka setiap titik layanan.</p>
+            <p class="text-xs text-blue-300 font-medium mt-2">Data diperbarui secara berkala oleh Admin Disdukcapil Kabupaten Tegal.</p>
         </footer>
 
     </main>

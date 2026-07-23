@@ -46,9 +46,9 @@
                 </div>
             </div>
             <div class="hidden md:flex space-x-4 text-xs font-bold text-blue-300">
-                <span>Tegal Luwih APIK</span>
-                <span>Dukcapil PRIMA</span>
-                <span>BerAKHLAK</span>
+                <span>#Tegal Luwih APIK</span>
+                <span>#Dukcapil PRIMA</span>
+                <span>#BerAKHLAK</span>
                 <span>#BanggaMelayaniBangsa</span>
             </div>
         </div>
@@ -274,7 +274,8 @@
                 datasets: [{
                     data: chartData,
                     backgroundColor: chartColors,
-                    borderWidth: 0,
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
                     hoverOffset: 4
                 }]
             },
